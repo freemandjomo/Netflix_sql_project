@@ -1,9 +1,10 @@
 A data analysis project using SQL to explore and summarize information about Netflix’s movies and TV shows.
 ![Netflixbild](https://github.com/freemandjomo/Netflix_sql_project/blob/main/netflix_bild.jpg)
 -- advanced SQL Project -- NETFLIX 
-DROP TABLE IF EXISTS netflix;
-CREATE TABLE netflix
-(
+
+ DROP TABLE IF EXISTS netflix;
+ CREATE TABLE netflix
+ (
     show_id      VARCHAR(25),
     type         VARCHAR(10),
     title        VARCHAR(250),
@@ -16,14 +17,16 @@ CREATE TABLE netflix
     duration     VARCHAR(15),
     listed_in    VARCHAR(250),
     description  VARCHAR(550)
-);
+  );
 1. Count the number of Movies vs TV Shows
- SELECT type,   
-	    COUNT(*) 
-	    FROM netflix 
-	 GROUP BY 1
+
+    SELECT type,   
+	       COUNT(*) 
+	       FROM netflix 
+	     GROUP BY 1;
 
 2. Find the most common rating for movies and TV shows
+
    WITH RatingCounts AS (
     SELECT 
         type,
@@ -32,6 +35,7 @@ CREATE TABLE netflix
     FROM netflix
     GROUP BY type, rating
 ),
+
 RankedRatings AS (
     SELECT 
         type,
@@ -40,16 +44,17 @@ RankedRatings AS (
         RANK() OVER (PARTITION BY type ORDER BY rating_count DESC) AS rank
     FROM RatingCounts
 )
+
 SELECT 
     type,
     rating AS most_frequent_rating
 FROM RankedRatings
 WHERE rank = 1;
-3. List all movies released in a specific year (e.g., 2020)
+4. List all movies released in a specific year (e.g., 2020)
     SELECT * 
 	FROM netflix
 	WHERE type = 'Movie' and release_year = 2020
-4. Find the top 5 countries with the most content on Netflix
+5. Find the top 5 countries with the most content on Netflix
     SELECT UNNEST(STRING_TO_ARRAY(country,',')) as countries, 
 	  COUNT(*) as contents    
 	  FROM  netflix
@@ -57,7 +62,7 @@ WHERE rank = 1;
 	  ORDER BY contents DESC
 	  LIMIT 5
 	  
-5. Identify the longest movie
+6. Identify the longest movie
     SELECT *, 
 	       SPLIT_PART(duration,' ',1)::INT as durations 
 	FROM  netflix
@@ -65,24 +70,24 @@ WHERE rank = 1;
 	     ORDER BY durations DESC
 	    LIMIT 1
 	
-6. Find content added in the last 7 years
+7. Find content added in the last 7 years
 SELECT * 
 FROM netflix 
 WHERE 
     TO_DATE(date_added,'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '7 years'
-7. Find all the movies/TV shows by director 'Steven Spielberg'!
+8. Find all the movies/TV shows by director 'Steven Spielberg'!
 SELECT * 
 FROM (
 SELECT title,
        UNNEST(STRING_TO_ARRAY(director,',')) as director FROM netflix
 	   GROUP BY 1,2 )  
 WHERE director = 'Steven Spielberg'	   
-8. List all TV shows with more than 3 seasons
+9. List all TV shows with more than 3 seasons
 SELECT * 
     FROM netflix
     WHERE  type = 'TV Show'
     AND SPLIT_PART(duration,' ',1)::INT > 3 
-9. Count the number of content items in each genre
+10. Count the number of content items in each genre
 SELECT
        UNNEST(STRING_TO_ARRAY(listed_in,',')) as genre ,
 	   COUNT(*) as total_count 
