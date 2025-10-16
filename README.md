@@ -95,3 +95,71 @@ TO_DATE(date_added,'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '7 years'
  GROUP BY 1,2 )  
  WHERE director = 'Steven Spielberg'
 ``` 
+## 8. List all TV shows with more than 3 seasons
+```sql 
+SELECT * 
+    FROM netflix
+    WHERE  type = 'TV Show'
+    AND SPLIT_PART(duration,' ',1)::INT > 3
+``` 
+## 9. Count the number of content items in each genre
+```sql
+SELECT
+       UNNEST(STRING_TO_ARRAY(listed_in,',')) as genre ,
+	   COUNT(*) as total_count 
+FROM netflix
+GROUP BY  1 
+```   
+## 10.Find each year and the average numbers of content release in United States on netflix.
+```sql 
+SELECT country,
+       release_year,
+       ROUND(count(show_id)::numeric /  (SELECT count(show_id) FROM netflix WHERE country = 'United States')::numeric * 100,2)
+	   as AVG_release_year   
+       FROM netflix 
+	   WHERE country = 'United States'
+       GROUP BY country ,release_year   
+	   ORDER BY AVG_release_year DESC
+	   LIMIT 5
+``` 
+return top 5 year with highest avg content release!
+## 11. List all movies that are documentaries
+ ```sql 
+    SELECT * 
+	FROM netflix
+	WHERE type = 'Movie' and listed_in LIKE '%Documentaries'
+ ``` 
+## 12. Find all content without a director
+```sql 
+    SELECT * 
+	FROM netflix 
+	WHERE director IS NULL
+```
+ 
+## 13. Find how many movies actor 'Salman Khan' appeared in last 10 years!
+ ```sql     
+	  SELECT * FROM netflix
+	   WHERE casts LIKE '%Salman Khan'
+	   AND release_year > EXTRACT( YEAR FROM CURRENT_DATE - 10  )
+ ```	   
+## 14. Find the top 8 actors who have appeared in the highest number of movies produced in Nigeria.
+  ```sql      
+	   SELECT UNNEST(STRING_TO_ARRAY(casts , ',')) as actors,
+	          COUNT(*) FROM netflix AS content_number 
+			  WHERE  country = 'Nigeria' 
+			  GROUP BY 1 
+	          ORDER BY 2 DESC
+			  LIMIT 8
+  ```			  
+## 15.Categorize the content based on the presence of the keywords 'kill' and 'violence' in 
+the description field. Label content containing these keywords as 'not_to_recommend' and all other 
+content as 'to_recommend'. Count how many items fall into each category.
+  ```sql
+   SELECT *,
+	 CASE  
+	 WHEN description LIKE '%kill%'
+	   OR description LIKE '%violence%' THEN 'not_to_recommend'
+	 ELSE 'to_recommend'
+	END category 
+	   FROM netflix
+ ``` 
