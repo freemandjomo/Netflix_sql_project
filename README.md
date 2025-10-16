@@ -39,7 +39,7 @@ CREATE TABLE netflix
 	    FROM netflix 
 	 GROUP BY 1
 ```
-**Objective**
+**Objective:** Determine the distribution of content types on Netflix.
 ## 2. Find the most common rating for movies and TV shows
 3. Find the most common rating for movies and TV shows
 
