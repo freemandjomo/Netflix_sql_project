@@ -77,15 +77,15 @@ WHERE rank = 1;
    ```sql
     SELECT * 
 	FROM netflix
-	WHERE type = 'Movie' and release_year = 2020
-	
- ## 6. Find the top 5 countries with the most content on Netflix
-    SELECT UNNEST(STRING_TO_ARRAY(country,',')) as countries, 
+	WHERE type = 'Movie' and release_year = 2020```
+## 6. Find the top 5 countries with the most content on Netflix
+  ````sql
+     SELECT UNNEST(STRING_TO_ARRAY(country,',')) as countries, 
 	  COUNT(*) as contents    
 	  FROM  netflix
 	  GROUP BY 1
 	  ORDER BY contents DESC
-	  LIMIT 5
+	  LIMIT 5 ``
 	  
 ## 7. Identify the longest movie
     SELECT *, 
