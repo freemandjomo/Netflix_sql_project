@@ -41,7 +41,7 @@ CREATE TABLE netflix
 ```
 ## 3. Find the most common rating for movies and TV shows
 
-
+```sql 
    WITH RatingCounts AS (
     SELECT 
         type,
@@ -63,6 +63,7 @@ SELECT
     rating AS most_frequent_rating
 FROM RankedRatings
 WHERE rank = 1;
+```
 5. List all movies released in a specific year (e.g., 2020)
     SELECT * 
 	FROM netflix
