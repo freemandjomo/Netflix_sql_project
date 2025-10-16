@@ -1,6 +1,7 @@
 # A data analysis project using SQL to explore and summarize information about Netflix’s movies and TV shows.
 ![Netflixbild](https://github.com/freemandjomo/Netflix_sql_project/blob/main/netflix_bild.jpg)
--- advanced SQL Project -- NETFLIX 
+## Overview  
+This project shows an explicte analysis of Netflix's movies and TV shows data using SQL. The Goal is to extract valuable insights and answer some business questions based on the dataset. The following README provides a detailed account of the project's objectives, business problems, solutions, findings, and conclusions.
 ## Objective
 -- advanced SQL Project -- NETFLIX 
 DROP TABLE IF EXISTS netflix;
@@ -21,7 +22,7 @@ CREATE TABLE netflix
 );
 ## 1. Count the number of Movies vs TV Shows
    
- SELECT type,   
+  SELECT type,   
 	    COUNT(*) 
 	    FROM netflix 
 	 GROUP BY 1
