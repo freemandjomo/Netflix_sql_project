@@ -64,6 +64,15 @@ SELECT
 FROM RankedRatings
 WHERE rank = 1;
 ```
+## 4. Find the top 5 countries with the most content on Netflix
+```sql
+    SELECT UNNEST(STRING_TO_ARRAY(country,',')) as countries, 
+	  COUNT(*) as contents    
+	  FROM  netflix
+	  GROUP BY 1
+	  ORDER BY contents DESC
+	  LIMIT 5
+ ```  
 ## 5. List all movies released in a specific year (e.g., 2020)
    ```sql
     SELECT * 
