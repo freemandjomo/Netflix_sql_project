@@ -78,4 +78,4 @@ WHERE rank = 1;
          SELECT * 
 	     FROM netflix
 	     WHERE type = 'Movie' and release_year = 2020
-       ```
+   ```
