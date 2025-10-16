@@ -64,10 +64,12 @@ SELECT
 FROM RankedRatings
 WHERE rank = 1;
 ```
-5. List all movies released in a specific year (e.g., 2020)
+## 5. List all movies released in a specific year (e.g., 2020)
+   ```sql
     SELECT * 
 	FROM netflix
 	WHERE type = 'Movie' and release_year = 2020
+	```
 6. Find the top 5 countries with the most content on Netflix
     SELECT UNNEST(STRING_TO_ARRAY(country,',')) as countries, 
 	  COUNT(*) as contents    
