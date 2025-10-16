@@ -19,14 +19,14 @@ CREATE TABLE netflix
     listed_in    VARCHAR(250),
     description  VARCHAR(550)
 );
-1. Count the number of Movies vs TV Shows
+## 1. Count the number of Movies vs TV Shows
    
  SELECT type,   
 	    COUNT(*) 
 	    FROM netflix 
 	 GROUP BY 1
 
-3. Find the most common rating for movies and TV shows
+## 3. Find the most common rating for movies and TV shows
 
 
    WITH RatingCounts AS (
