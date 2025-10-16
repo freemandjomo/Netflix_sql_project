@@ -11,7 +11,7 @@ This project shows an explicte analysis of Netflix's movies and TV shows data us
 - Explore and categorize content based on specific criteria and keywords.
 
 ## Dataset
-![the Link to the dataset :]()
+the Link to the dataset : ![here:]() 
 
 -- advanced SQL Project -- NETFLIX 
    DROP TABLE IF EXISTS netflix;
