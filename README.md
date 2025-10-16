@@ -78,8 +78,8 @@ WHERE rank = 1;
     SELECT * 
 	FROM netflix
 	WHERE type = 'Movie' and release_year = 2020
-	```
-6. Find the top 5 countries with the most content on Netflix
+	
+ ## 6. Find the top 5 countries with the most content on Netflix
     SELECT UNNEST(STRING_TO_ARRAY(country,',')) as countries, 
 	  COUNT(*) as contents    
 	  FROM  netflix
@@ -87,7 +87,7 @@ WHERE rank = 1;
 	  ORDER BY contents DESC
 	  LIMIT 5
 	  
-7. Identify the longest movie
+## 7. Identify the longest movie
     SELECT *, 
 	       SPLIT_PART(duration,' ',1)::INT as durations 
 	FROM  netflix
@@ -95,31 +95,31 @@ WHERE rank = 1;
 	     ORDER BY durations DESC
 	    LIMIT 1
 	
-8. Find content added in the last 7 years
+## 8. Find content added in the last 7 years
 SELECT * 
 FROM netflix 
 WHERE 
     TO_DATE(date_added,'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '7 years'
-9. Find all the movies/TV shows by director 'Steven Spielberg'!
+## 9. Find all the movies/TV shows by director 'Steven Spielberg'!
 SELECT * 
 FROM (
 SELECT title,
        UNNEST(STRING_TO_ARRAY(director,',')) as director FROM netflix
 	   GROUP BY 1,2 )  
 WHERE director = 'Steven Spielberg'	   
-10. List all TV shows with more than 3 seasons
+## 10. List all TV shows with more than 3 seasons
 SELECT * 
     FROM netflix
     WHERE  type = 'TV Show'
     AND SPLIT_PART(duration,' ',1)::INT > 3 
-11. Count the number of content items in each genre
+## 11. Count the number of content items in each genre
 SELECT
        UNNEST(STRING_TO_ARRAY(listed_in,',')) as genre ,
 	   COUNT(*) as total_count 
 FROM netflix
 GROUP BY  1 
    
-10.Find each year and the average numbers of content release in United States on netflix.
+## 10.Find each year and the average numbers of content release in United States on netflix.
 SELECT country,
        release_year,
        ROUND(count(show_id)::numeric /  (SELECT count(show_id) FROM netflix WHERE country = 'United States')::numeric * 100,2)
@@ -130,21 +130,21 @@ SELECT country,
 	   ORDER BY AVG_release_year DESC
 	   LIMIT 5
 return top 5 year with highest avg content release!
-11. List all movies that are documentaries
+## 11. List all movies that are documentaries
     SELECT * 
 	FROM netflix
 	WHERE type = 'Movie' and listed_in LIKE '%Documentaries' 
-12. Find all content without a director
+## 12. Find all content without a director
     SELECT * 
 	FROM netflix 
 	WHERE director IS NULL  
-13. Find how many movies actor 'Salman Khan' appeared in last 10 years!
+## 13. Find how many movies actor 'Salman Khan' appeared in last 10 years!
       
 	  SELECT * FROM netflix
 	   WHERE casts LIKE '%Salman Khan'
 	   AND release_year > EXTRACT( YEAR FROM CURRENT_DATE - 10  )
 	   
-14. Find the top 8 actors who have appeared in the highest number of movies produced in Nigeria.
+## 14. Find the top 8 actors who have appeared in the highest number of movies produced in Nigeria.
        
 	   SELECT UNNEST(STRING_TO_ARRAY(casts , ',')) as actors,
 	          COUNT(*) FROM netflix AS content_number 
@@ -153,7 +153,7 @@ return top 5 year with highest avg content release!
 	          ORDER BY 2 DESC
 			  LIMIT 8
 			  
-15.Categorize the content based on the presence of the keywords 'kill' and 'violence' in 
+## 15.Categorize the content based on the presence of the keywords 'kill' and 'violence' in 
 the description field. Label content containing these keywords as 'not_to_recommend' and all other 
 content as 'to_recommend'. Count how many items fall into each category.
 
