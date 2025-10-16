@@ -77,7 +77,8 @@ WHERE rank = 1;
    ```sql
          SELECT * 
 	     FROM netflix
-	     WHERE type = 'Movie' and release_year = 2020```
+	     WHERE type = 'Movie' and release_year = 2020
+       ```
 ## 6. Find the top 5 countries with the most content on Netflix
   ```sql
      SELECT UNNEST(STRING_TO_ARRAY(country,',')) as countries, 
@@ -96,10 +97,10 @@ WHERE rank = 1;
 	    LIMIT 1
 	
 ## 8. Find content added in the last 7 years
-SELECT * 
-FROM netflix 
-WHERE 
-    TO_DATE(date_added,'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '7 years'
+      SELECT * 
+      FROM netflix 
+      WHERE 
+      TO_DATE(date_added,'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '7 years'
 ## 9. Find all the movies/TV shows by director 'Steven Spielberg'!
 SELECT * 
 FROM (
