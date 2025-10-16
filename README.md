@@ -39,7 +39,9 @@ CREATE TABLE netflix
 	    FROM netflix 
 	 GROUP BY 1
 ```
-## 3. Find the most common rating for movies and TV shows
+**Objective**
+## 2. Find the most common rating for movies and TV shows
+3. Find the most common rating for movies and TV shows
 
 ```sql 
    WITH RatingCounts AS (
@@ -64,6 +66,12 @@ SELECT
 FROM RankedRatings
 WHERE rank = 1;
 ```
+## 3. Find the most common rating for movies and TV shows
+```sql
+    SELECT * 
+	FROM netflix
+	WHERE type = 'Movie' and release_year = 2020
+``` 
 ## 4. Find the top 5 countries with the most content on Netflix
 ```sql
     SELECT UNNEST(STRING_TO_ARRAY(country,',')) as countries, 
