@@ -1,7 +1,7 @@
 # A data analysis project using SQL to explore and summarize information about Netflix’s movies and TV shows.
 ![Netflixbild](https://github.com/freemandjomo/Netflix_sql_project/blob/main/netflix_bild.jpg)
 -- advanced SQL Project -- NETFLIX 
-
+## Objective
 -- advanced SQL Project -- NETFLIX 
 DROP TABLE IF EXISTS netflix;
 CREATE TABLE netflix
