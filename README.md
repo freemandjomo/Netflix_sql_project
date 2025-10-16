@@ -1,4 +1,4 @@
-A data analysis project using SQL to explore and summarize information about Netflix’s movies and TV shows.
+# A data analysis project using SQL to explore and summarize information about Netflix’s movies and TV shows.
 ![Netflixbild](https://github.com/freemandjomo/Netflix_sql_project/blob/main/netflix_bild.jpg)
 -- advanced SQL Project -- NETFLIX 
 
@@ -20,12 +20,15 @@ CREATE TABLE netflix
     description  VARCHAR(550)
 );
 1. Count the number of Movies vs TV Shows
+   
  SELECT type,   
 	    COUNT(*) 
 	    FROM netflix 
 	 GROUP BY 1
 
-2. Find the most common rating for movies and TV shows
+3. Find the most common rating for movies and TV shows
+
+
    WITH RatingCounts AS (
     SELECT 
         type,
@@ -47,11 +50,11 @@ SELECT
     rating AS most_frequent_rating
 FROM RankedRatings
 WHERE rank = 1;
-3. List all movies released in a specific year (e.g., 2020)
+5. List all movies released in a specific year (e.g., 2020)
     SELECT * 
 	FROM netflix
 	WHERE type = 'Movie' and release_year = 2020
-4. Find the top 5 countries with the most content on Netflix
+6. Find the top 5 countries with the most content on Netflix
     SELECT UNNEST(STRING_TO_ARRAY(country,',')) as countries, 
 	  COUNT(*) as contents    
 	  FROM  netflix
@@ -59,7 +62,7 @@ WHERE rank = 1;
 	  ORDER BY contents DESC
 	  LIMIT 5
 	  
-5. Identify the longest movie
+7. Identify the longest movie
     SELECT *, 
 	       SPLIT_PART(duration,' ',1)::INT as durations 
 	FROM  netflix
@@ -67,24 +70,24 @@ WHERE rank = 1;
 	     ORDER BY durations DESC
 	    LIMIT 1
 	
-6. Find content added in the last 7 years
+8. Find content added in the last 7 years
 SELECT * 
 FROM netflix 
 WHERE 
     TO_DATE(date_added,'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '7 years'
-7. Find all the movies/TV shows by director 'Steven Spielberg'!
+9. Find all the movies/TV shows by director 'Steven Spielberg'!
 SELECT * 
 FROM (
 SELECT title,
        UNNEST(STRING_TO_ARRAY(director,',')) as director FROM netflix
 	   GROUP BY 1,2 )  
 WHERE director = 'Steven Spielberg'	   
-8. List all TV shows with more than 3 seasons
+10. List all TV shows with more than 3 seasons
 SELECT * 
     FROM netflix
     WHERE  type = 'TV Show'
     AND SPLIT_PART(duration,' ',1)::INT > 3 
-9. Count the number of content items in each genre
+11. Count the number of content items in each genre
 SELECT
        UNNEST(STRING_TO_ARRAY(listed_in,',')) as genre ,
 	   COUNT(*) as total_count 
