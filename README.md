@@ -79,3 +79,17 @@ WHERE rank = 1;
 	     FROM netflix
 	     WHERE type = 'Movie' and release_year = 2020
    ```
+## 6. Find content added in the last 7 years
+```sql SELECT * 
+       FROM netflix 
+       WHERE 
+       TO_DATE(date_added,'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '7 years'
+```	   
+## 7. Find all the movies/TV shows by director 'Steven Spielberg'!
+```sql  SELECT * 
+        FROM (
+        SELECT title,
+        UNNEST(STRING_TO_ARRAY(director,',')) as director FROM netflix
+	   GROUP BY 1,2 )  
+       WHERE director = 'Steven Spielberg'
+``` 
