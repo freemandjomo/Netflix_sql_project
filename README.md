@@ -41,8 +41,6 @@ CREATE TABLE netflix
 ```
 **Objective:** Determine the distribution of content types on Netflix.
 ## 2. Find the most common rating for movies and TV shows
-3. Find the most common rating for movies and TV shows
-
 ```sql 
    WITH RatingCounts AS (
     SELECT 
@@ -66,35 +64,50 @@ SELECT
 FROM RankedRatings
 WHERE rank = 1;
 ```
-## 3. Find the most common rating for movies and TV shows
+**Objective:** Identify the most frequently occurring rating for each type of content.
+
+## 3. List all movies released in a specific year (e.g., 2020)
+
 ```sql
     SELECT * 
 	FROM netflix
 	WHERE type = 'Movie' and release_year = 2020
-``` 
-## 4. Find the top 5 countries with the most content on Netflix
+```
+**Objective:** Determine all the countries that have been released in 2020.
+
+## 4. Find the top 3 countries with the most content on Netflix
 ```sql
     SELECT UNNEST(STRING_TO_ARRAY(country,',')) as countries, 
 	  COUNT(*) as contents    
 	  FROM  netflix
 	  GROUP BY 1
 	  ORDER BY contents DESC
-	  LIMIT 5
- ```  
-## 5. List all movies released in a specific year (e.g., 2020)
-   ```sql
-         SELECT * 
-	     FROM netflix
-	     WHERE type = 'Movie' and release_year = 2020
+	  LIMIT 3
+ ```
+**Objective:** List the three country with the most content .
+
+## 5. Identify the longest movie
+    
+ ``` sql
+           SELECT *, 
+	       SPLIT_PART(duration,' ',1)::INT as durations 
+	 FROM  netflix
+	     WHERE type = 'Movie' AND duration IS NOT NULL 
+	     ORDER BY durations DESC
+	    LIMIT 1
    ```
+**Objective:** Determines the longest Movie  
 ## 6. Find content added in the last 7 years
 ```sql
 SELECT * 
 FROM netflix 
 WHERE 
 TO_DATE(date_added,'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '7 years'
-```	   
+```
+**Objective:** Retrieve all Movies added in the last 7 years.  
+   
 ## 7. Find all the movies/TV shows by director 'Steven Spielberg'!
+
 ```sql
  SELECT * 
  FROM (
@@ -102,14 +115,17 @@ TO_DATE(date_added,'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '7 years'
  UNNEST(STRING_TO_ARRAY(director,',')) as director FROM netflix
  GROUP BY 1,2 )  
  WHERE director = 'Steven Spielberg'
-``` 
+```
+**Objective:** Retrieve all Movies directed by Steven Spielberg . 
 ## 8. List all TV shows with more than 3 seasons
 ```sql 
 SELECT * 
     FROM netflix
     WHERE  type = 'TV Show'
     AND SPLIT_PART(duration,' ',1)::INT > 3
-``` 
+```
+**Objective:** Retrieve all Movies longer than 3 Seasons. 
+ 
 ## 9. Count the number of content items in each genre
 ```sql
 SELECT
@@ -117,7 +133,8 @@ SELECT
 	   COUNT(*) as total_count 
 FROM netflix
 GROUP BY  1 
-```   
+```
+**Objective:** determine the number of content of each genre.  
 ## 10.Find each year and the average numbers of content release in United States on netflix.
 ```sql 
 SELECT country,
@@ -129,27 +146,32 @@ SELECT country,
        GROUP BY country ,release_year   
 	   ORDER BY AVG_release_year DESC
 	   LIMIT 5
-``` 
+```
+**Objective:** determine for each Year the average number of Movies released in United states .  
+ 
 return top 5 year with highest avg content release!
 ## 11. List all movies that are documentaries
  ```sql 
     SELECT * 
 	FROM netflix
 	WHERE type = 'Movie' and listed_in LIKE '%Documentaries'
- ``` 
+ ```
+**Objective:** determine for each Year the average number of Movies released in United states .
+
 ## 12. Find all content without a director
 ```sql 
     SELECT * 
 	FROM netflix 
 	WHERE director IS NULL
 ```
- 
+**Objective:** Return all content without a director. 
 ## 13. Find how many movies actor 'Salman Khan' appeared in last 10 years!
  ```sql     
 	  SELECT * FROM netflix
 	   WHERE casts LIKE '%Salman Khan'
 	   AND release_year > EXTRACT( YEAR FROM CURRENT_DATE - 10  )
- ```	   
+ ```
+**Objective:** Determine the number of Movie where the Actor Salman Khan appeared . 	   
 ## 14. Find the top 8 actors who have appeared in the highest number of movies produced in Nigeria.
   ```sql      
 	   SELECT UNNEST(STRING_TO_ARRAY(casts , ',')) as actors,
@@ -158,7 +180,9 @@ return top 5 year with highest avg content release!
 			  GROUP BY 1 
 	          ORDER BY 2 DESC
 			  LIMIT 8
-  ```			  
+  ```
+**Objective:** List the 8 actors who have appeeared in the highest Number of Movies.	   
+			  
 ## 15.Categorize the content based on the presence of the keywords 'kill' and 'violence' in 
 the description field. Label content containing these keywords as 'not_to_recommend' and all other 
 content as 'to_recommend'. Count how many items fall into each category.
@@ -171,3 +195,4 @@ content as 'to_recommend'. Count how many items fall into each category.
 	END category 
 	   FROM netflix
  ``` 
+**Objective:** Categorize content as 'Bad' if it contains 'kill' or 'violence' and 'Good' otherwise. Count the number of items in each category.	   
