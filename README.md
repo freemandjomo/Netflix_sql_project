@@ -195,4 +195,6 @@ content as 'to_recommend'. Count how many items fall into each category.
 	END category 
 	   FROM netflix
  ``` 
-**Objective:** Categorize content as 'Bad' if it contains 'kill' or 'violence' and 'Good' otherwise. Count the number of items in each category.	   
+**Objective:** Categorize content as 'Bad' if it contains 'kill' or 'violence' and 'Good' otherwise. Count the number of items in each category.	
+
+**Author** - FREEMAN DJOMO
