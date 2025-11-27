@@ -202,4 +202,4 @@ content as 'to_recommend'. Count how many items fall into each category.
 - Geographical Insights: The top countries and the average content releases by India highlight regional content distribution.
 - Content Categorization: Categorizing content based on specific keywords helps in understanding the nature of content available on Netflix.
 
-## Author - FREEMAN DJOMO
+## Author - MERVEILLES FREEMAN DJOMO TOUKA
