@@ -203,3 +203,6 @@ content as 'to_recommend'. Count how many items fall into each category.
 - Content Categorization: Categorizing content based on specific keywords helps in understanding the nature of content available on Netflix.
 
 ## Author - MERVEILLES FREEMAN DJOMO TOUKA
+
+ [My email adress](djomofreeman1776@gmail.com)  
+ [My GitHub](https://github.com/freemandjomo)
