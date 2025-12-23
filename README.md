@@ -212,4 +212,5 @@ content as 'to_recommend'. Count how many items fall into each category.
 Feel free to fork this repository and submit pull requests! Any improvements to the queries or additional analyses are welcome.
 
 ---
+⭐ **Star this repository if you found it helpful!**
 
