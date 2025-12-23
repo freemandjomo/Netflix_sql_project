@@ -206,3 +206,10 @@ content as 'to_recommend'. Count how many items fall into each category.
 
  [My email adress](djomofreeman1776@gmail.com)  
  [My GitHub](https://github.com/freemandjomo)
+
+ ##  Contributing
+
+Feel free to fork this repository and submit pull requests! Any improvements to the queries or additional analyses are welcome.
+
+---
+
