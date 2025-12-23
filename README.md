@@ -12,7 +12,7 @@ This project shows an explicte analysis of Netflix's movies and TV shows data us
 
 ## Dataset
 the Link to the DATASET : [DATASET](https://www.kaggle.com/datasets/shivamb/netflix-shows?resource=download) 
-## SCHEMA OF THE TABLE :
+## 📋 SCHEMA OF THE TABLE :
 ```sql
 -- advanced SQL Project -- NETFLIX 
    DROP TABLE IF EXISTS netflix;
